@@ -1,4 +1,8 @@
-#Main game file
+'''
+Astro Party Online Game
+By Hajin and David
+'''
+
 import sys
 import os
 import time
