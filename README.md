@@ -1,2 +1,2 @@
-# Pygame-Project
-Multi-player 2D-shooter pygame project.
+# Pygame Project
+Arcade-style 2D-shooter Pygame Demo
