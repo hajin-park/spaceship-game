@@ -1,6 +1,12 @@
 # Pygame Project
 
-Arcade-style 2D-shooter Pygame Demo
+Arcade-style 2D-shooter made with Pygame Features:
+
+-   Spatial Hashing collision optimization
+-   Delta time framerate independance
+-   Custom animated assets
+-   Custom particle effects
+-   Doges
 
 ## Demo
 
