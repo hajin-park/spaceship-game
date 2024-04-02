@@ -1,7 +1,7 @@
-'''
+"""
 Astro Party Online Game
 By Hajin and David
-'''
+"""
 
 import sys
 import os
@@ -17,7 +17,7 @@ from modules.item import MysteryBox, Shield, PowerUp
 from modules.spatialhashing import SpatialHashing
 from modules.particle import Particle
 
-os.environ['SDL_VIDEO_CENTERED'] = '1'
+os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 
 class AstroPartyOnline:
@@ -30,7 +30,9 @@ class AstroPartyOnline:
         pygame.mouse.set_cursor(*pygame.cursors.broken_x)
 
         self.settings = Settings(self)
-        self.screen = pygame.display.set_mode(self.settings.window_dimensions, pygame.NOFRAME)
+        self.screen = pygame.display.set_mode(
+            self.settings.window_dimensions, pygame.NOFRAME
+        )
         self.screen_rect = self.screen.get_rect()
         self.clock = pygame.time.Clock()
 
@@ -38,7 +40,6 @@ class AstroPartyOnline:
         self.spatial_hashing = SpatialHashing(self, 80)
         self.fps = GetFPS(self)
         self.ship = Player(self)
-
 
         # ------------------------------ Sprite groups
         self.projectiles = pygame.sprite.Group()
@@ -168,7 +169,7 @@ class AstroPartyOnline:
             pass
 
         else:
-            new_powerup = PowerUp(self, pos) 
+            new_powerup = PowerUp(self, pos)
             self.powerups.add(new_powerup)
 
     # ------------------------------ Update / remove particles
@@ -196,19 +197,46 @@ class AstroPartyOnline:
     # ------------------------------ Spawn ship engine particles
     def _spawn_engine_particles(self, ship):
         for _ in range(randint(1, 3)):
-            new_particle = Particle(self, (ship.rect.center[0] + (randint(0, 7) - 6), ship.rect.center[1] + (randint(0, 7) - 6)), randint(2, 6), (255, randint(155, 256), 0), (-self.ship.vel.x * self.settings.UPDATE_TIME, -self.ship.vel.y * self.settings.UPDATE_TIME), (10, 15)) # - (pos, size, color, vel, duration)
+            new_particle = Particle(
+                self,
+                (
+                    ship.rect.center[0] + (randint(0, 7) - 6),
+                    ship.rect.center[1] + (randint(0, 7) - 6),
+                ),
+                randint(2, 6),
+                (255, randint(155, 256), 0),
+                (
+                    -self.ship.vel.x * self.settings.UPDATE_TIME,
+                    -self.ship.vel.y * self.settings.UPDATE_TIME,
+                ),
+                (10, 15),
+            )  # - (pos, size, color, vel, duration)
             self.engine_particles.append(new_particle)
-    
+
     # ------------------------------ Spawn mystery box collision particles
     def _spawn_mystery_box_particles(self, box):
         for _ in range(randint(8, 13)):
-            new_particle = Particle(self, box.rect.center, randint(2, 6), (randint(0, 256), randint(0, 256), randint(0, 256)), (randint(0, 120) / 20 - 3, randint(0, 120) / 20 - 3), (5, 10)) # - (pos, size, color, vel, duration)
+            new_particle = Particle(
+                self,
+                box.rect.center,
+                randint(2, 6),
+                (randint(0, 256), randint(0, 256), randint(0, 256)),
+                (randint(0, 120) / 20 - 3, randint(0, 120) / 20 - 3),
+                (5, 10),
+            )  # - (pos, size, color, vel, duration)
             self.destroyed_mystery_box_particles.append(new_particle)
 
     # ------------------------------ Spawn projectile collision particles
     def _spawn_projectile_particles(self, projectile):
-        for _ in range(randint(4, 7)):
-            new_particle = Particle(self, projectile.rect.center, randint(2, 6), (255, randint(155, 256), 0), (randint(0, 120) / 20 - 3, randint(0, 120) / 20 - 3), (8, 13)) # - (pos, size, color, vel, duration)
+        for _ in range(randint(50, 100)):
+            new_particle = Particle(
+                self,
+                projectile.rect.center,
+                randint(2, 6),
+                (255, randint(155, 256), 0),
+                (randint(60, 200) / 20 - 3, randint(60, 200) / 20 - 3),
+                (8, 13),
+            )  # - (pos, size, color, vel, duration)
             self.destroyed_projectile_particles.append(new_particle)
 
     # ------------------------------ Manage timers

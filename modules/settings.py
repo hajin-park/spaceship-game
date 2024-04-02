@@ -1,13 +1,18 @@
-#Game settings
+# Game settings
 
 
 class Settings:
+    FRAME_SIZES = {
+        "small": (800, 600),
+        "medium": (1200, 800),
+        "large": (1920, 1080),
+    }
 
     def __init__(self, main):
         # ------------------------------ Game render settings
-        self.window_dimensions = (1920, 1080)
-        self.framerate = 120 # - Framerate cap
-        self.UPDATE_TIME = 1/60 # - Refresh rate
+        self.window_dimensions = self.FRAME_SIZES["medium"]
+        self.framerate = 120  # - Framerate cap
+        self.UPDATE_TIME = 1 / 60  # - Refresh rate
 
         # ------------------------------ Player ship settings
         self.player_speed = 40
